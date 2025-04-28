@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NBA Draft Pick Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>NBA Draft Pick Game</h1>
+        <div style="text-align:center; margin-bottom: 12px;">
+            <label for="difficulty">Difficulty: </label>
+            <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+        <div id="score" style="text-align:center; font-weight:600; margin-bottom:10px;">Score: 0/0</div>
+        <div id="game">
+            <p id="player-name"></p>
+            <form id="guess-form">
+                <label>
+                    Draft Pick:
+                    <input type="number" id="pick-input" min="1" max="30" required>
+                </label>
+                <label>
+                    Draft Year:
+                    <input type="number" id="year-input" min="2003" max="2022" required>
+                </label>
+                <button type="submit">Guess</button>
+            </form>
+            <button id="skip-btn" type="button">Skip</button>
+            <div id="result"></div>
+            <div id="player-details" style="display:none; margin-top:10px;"></div>
+            <button id="next-btn" style="display:none;">Next Player</button>
+        </div>
+        <footer>
+            <p>
+                Data source: 
+                <a href="https://en.wikipedia.org/wiki/2022_NBA_draft" target="_blank" rel="noopener">
+                    Wikipedia - NBA Drafts
+                </a>
+            </p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
