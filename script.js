@@ -503,3 +503,195 @@ let currentPlayer = null;
 let attemptsLeft = 3;
 let timer = null;
 let timeLeft = 60;
+let shownPlayerIndices = [];
+let score = 0;
+let total = 0;
+let filteredIndices = [];
+let currentDifficulty = 'easy';
+
+function updateScoreDisplay() {
+    document.getElementById('score').textContent = `Score: ${score}/${total}`;
+}
+
+function filterPlayersByDifficulty() {
+    let maxPick = 10;
+    if (currentDifficulty === 'medium') maxPick = 20;
+    if (currentDifficulty === 'hard') maxPick = 30;
+    filteredIndices = players
+        .map((p, idx) => ({p, idx}))
+        .filter(obj => obj.p.pick <= maxPick)
+        .map(obj => obj.idx);
+}
+
+function getRandomPlayer() {
+    // If all filtered players have been shown, reset the session
+    if (shownPlayerIndices.length === filteredIndices.length) {
+        shownPlayerIndices = [];
+        alert('All players for this difficulty have been shown! The pool will now reset.');
+    }
+    // Get available indices
+    const availableIndices = filteredIndices.filter(idx => !shownPlayerIndices.includes(idx));
+    // Pick a random available index
+    const idx = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+    shownPlayerIndices.push(idx);
+    return players[idx];
+}
+
+function updateTimerDisplay() {
+    const timerEl = document.getElementById('timer');
+    if (timerEl) {
+        timerEl.textContent = `Time left: ${timeLeft}s`;
+    }
+}
+
+function startTimer() {
+    clearInterval(timer);
+    timeLeft = 60;
+    updateTimerDisplay();
+    timer = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            handleGuessTimeout();
+        }
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(timer);
+}
+
+function handleGuessTimeout() {
+    attemptsLeft--;
+    if (attemptsLeft > 0) {
+        document.getElementById('result').innerHTML = `⏰ Time's up for this guess! You have ${attemptsLeft} trial${attemptsLeft === 1 ? '' : 's'} left.`;
+        startTimer();
+    } else {
+        document.getElementById('result').innerHTML = `⏰ Out of time! ${currentPlayer.name} was pick #${currentPlayer.pick} in ${currentPlayer.year}. <a href="${currentPlayer.wiki}" target="_blank" rel="noopener">See draft</a>`;
+        document.getElementById('next-btn').style.display = 'inline-block';
+        document.getElementById('pick-input').disabled = true;
+        document.getElementById('year-input').disabled = true;
+        document.getElementById('guess-form').querySelector('button[type="submit"]').disabled = true;
+        document.getElementById('skip-btn').disabled = true;
+        stopTimer();
+    }
+}
+
+function showPlayer() {
+    currentPlayer = getRandomPlayer();
+    attemptsLeft = 3;
+    document.getElementById('player-name').textContent = `Player: ${currentPlayer.name}`;
+    document.getElementById('result').textContent = '';
+    document.getElementById('guess-form').reset();
+    document.getElementById('next-btn').style.display = 'none';
+    document.getElementById('pick-input').disabled = false;
+    document.getElementById('year-input').disabled = false;
+    document.getElementById('guess-form').querySelector('button[type="submit"]').disabled = false;
+    document.getElementById('skip-btn').disabled = false;
+    document.getElementById('player-details').style.display = 'none';
+    startTimer();
+}
+
+function showPlayerDetails() {
+    const details = document.getElementById('player-details');
+    details.innerHTML = `
+        <strong>Team:</strong> ${currentPlayer.team || 'N/A'}<br>
+        <strong>College:</strong> ${currentPlayer.college || 'N/A'}<br>
+        <strong>Position:</strong> ${currentPlayer.position || 'N/A'}<br>
+        <strong>Nationality:</strong> ${currentPlayer.nationality || 'N/A'}
+    `;
+    details.style.display = 'block';
+}
+
+document.getElementById('guess-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (timeLeft <= 0) return;
+    const pick = parseInt(document.getElementById('pick-input').value, 10);
+    const year = parseInt(document.getElementById('year-input').value, 10);
+
+    let resultMsg = '';
+    total++;
+    if (pick === currentPlayer.pick && year === currentPlayer.year) {
+        score++;
+        resultMsg = `✅ Correct! ${currentPlayer.name} was pick #${currentPlayer.pick} in ${currentPlayer.year}.`;
+        document.getElementById('next-btn').style.display = 'inline-block';
+        document.getElementById('pick-input').disabled = true;
+        document.getElementById('year-input').disabled = true;
+        document.getElementById('guess-form').querySelector('button[type="submit"]').disabled = true;
+        document.getElementById('skip-btn').disabled = true;
+        stopTimer();
+        showPlayerDetails();
+    } else {
+        attemptsLeft--;
+        let hints = [];
+        if (pick !== currentPlayer.pick) {
+            hints.push(`Pick: ${pick < currentPlayer.pick ? 'Higher' : 'Lower'}`);
+        }
+        if (year !== currentPlayer.year) {
+            hints.push(`Year: ${year < currentPlayer.year ? 'Higher' : 'Lower'}`);
+        }
+        if (attemptsLeft > 0) {
+            resultMsg = `❌ Not quite! ${hints.join(' | ')}<br>You have ${attemptsLeft} trial${attemptsLeft === 1 ? '' : 's'} left.`;
+            startTimer(); // reset timer for next guess
+        } else {
+            resultMsg = `❌ Out of trials! ${currentPlayer.name} was pick #${currentPlayer.pick} in ${currentPlayer.year}. <a href="${currentPlayer.wiki}" target="_blank" rel="noopener">See draft</a>`;
+            document.getElementById('next-btn').style.display = 'inline-block';
+            document.getElementById('pick-input').disabled = true;
+            document.getElementById('year-input').disabled = true;
+            document.getElementById('guess-form').querySelector('button[type="submit"]').disabled = true;
+            document.getElementById('skip-btn').disabled = true;
+            stopTimer();
+            showPlayerDetails();
+        }
+    }
+    document.getElementById('result').innerHTML = resultMsg;
+    updateScoreDisplay();
+});
+
+document.getElementById('next-btn').addEventListener('click', showPlayer);
+document.getElementById('skip-btn').addEventListener('click', function() {
+    total++;
+    document.getElementById('result').innerHTML = `⏩ Skipped! ${currentPlayer.name} was pick #${currentPlayer.pick} in ${currentPlayer.year}. <a href="${currentPlayer.wiki}" target="_blank" rel="noopener">See draft</a>`;
+    document.getElementById('next-btn').style.display = 'inline-block';
+    document.getElementById('pick-input').disabled = true;
+    document.getElementById('year-input').disabled = true;
+    document.getElementById('guess-form').querySelector('button[type="submit"]').disabled = true;
+    document.getElementById('skip-btn').disabled = true;
+    stopTimer();
+    showPlayerDetails();
+    updateScoreDisplay();
+});
+
+document.getElementById('difficulty').addEventListener('change', function(e) {
+    currentDifficulty = e.target.value;
+    filterPlayersByDifficulty();
+    shownPlayerIndices = [];
+    score = 0;
+    total = 0;
+    updateScoreDisplay();
+    showPlayer();
+});
+
+// Add timer display to the DOM if not present
+if (!document.getElementById('timer')) {
+    const timerDiv = document.createElement('div');
+    timerDiv.id = 'timer';
+    timerDiv.style.textAlign = 'center';
+    timerDiv.style.fontWeight = 'bold';
+    timerDiv.style.marginBottom = '10px';
+    document.getElementById('game').insertBefore(timerDiv, document.getElementById('player-name'));
+}
+
+// Initialize game on load
+filterPlayersByDifficulty();
+updateScoreDisplay();
+showPlayer();
+
+async function fetchDraftPlayers(year) {
+    const url = `https://en.wikipedia.org/w/api.php?action=parse&page=${year}_NBA_draft&format=json&origin=*`;
+    const response = await fetch(url);
+    const data = await response.json();
+    // Parse data.parse.text to extract player info (may need DOMParser)
+    // Return array of player objects
+}
