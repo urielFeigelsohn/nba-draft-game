@@ -181,70 +181,56 @@ const players = [
         name: "Anthony Davis",
         pick: 1,
         year: 2012,
-        wiki: "https://en.wikipedia.org/wiki/2012_NBA_draft"
+        wiki: "https://en.wikipedia.org/wiki/2012_NBA_draft",
+        img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Anthony_Davis_Lakers.jpg",
+        team: "New Orleans Hornets",
+        college: "Kentucky",
+        position: "PF/C",
+        nationality: "USA"
     },
     {
         name: "Giannis Antetokounmpo",
         pick: 15,
         year: 2013,
-        wiki: "https://en.wikipedia.org/wiki/2013_NBA_draft"
+        wiki: "https://en.wikipedia.org/wiki/2013_NBA_draft",
+        img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Giannis_Antetokounmpo_Bucks.jpg",
+        team: "Milwaukee Bucks",
+        college: "Filathlitikos (Greece)",
+        position: "SF/PF",
+        nationality: "Greece"
     },
     {
         name: "Joel Embiid",
         pick: 3,
         year: 2014,
-        wiki: "https://en.wikipedia.org/wiki/2014_NBA_draft"
-    },
-    {
-        name: "Karl-Anthony Towns",
-        pick: 1,
-        year: 2015,
-        wiki: "https://en.wikipedia.org/wiki/2015_NBA_draft"
-    },
-    {
-        name: "Jayson Tatum",
-        pick: 3,
-        year: 2017,
-        wiki: "https://en.wikipedia.org/wiki/2017_NBA_draft",
-        img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Jayson_Tatum_Celtics.jpg",
-        team: "Boston Celtics",
-        college: "Duke",
-        position: "SF/PF",
-        nationality: "USA"
-    },
-    {
-        name: "Luka Dončić",
-        pick: 3,
-        year: 2018,
-        wiki: "https://en.wikipedia.org/wiki/2018_NBA_draft",
-        img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Luka_Doncic_Mavs.jpg",
-        team: "Dallas Mavericks",
-        college: "Real Madrid (Spain)",
-        position: "PG/SG/SF",
-        nationality: "Slovenia"
-    },
-    {
-        name: "Zion Williamson",
-        pick: 1,
-        year: 2019,
-        wiki: "https://en.wikipedia.org/wiki/2019_NBA_draft",
-        img: "https://upload.wikimedia.org/wikipedia/commons/0/0b/Zion_Williamson_Pelicans.jpg",
-        team: "New Orleans Pelicans",
-        college: "Duke",
-        position: "PF",
-        nationality: "USA"
+        wiki: "https://en.wikipedia.org/wiki/2014_NBA_draft",
+        img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Joel_Embiid_76ers.jpg",
+        team: "Philadelphia 76ers",
+        college: "Kansas",
+        position: "C",
+        nationality: "Cameroon"
     },
     {
         name: "LaMelo Ball",
         pick: 3,
         year: 2020,
-        wiki: "https://en.wikipedia.org/wiki/2020_NBA_draft"
+        wiki: "https://en.wikipedia.org/wiki/2020_NBA_draft",
+        img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/LaMelo_Ball_Hornets.jpg",
+        team: "Charlotte Hornets",
+        college: "Illawarra Hawks (Australia)",
+        position: "PG",
+        nationality: "USA"
     },
     {
         name: "Paolo Banchero",
         pick: 1,
         year: 2022,
-        wiki: "https://en.wikipedia.org/wiki/2022_NBA_draft"
+        wiki: "https://en.wikipedia.org/wiki/2022_NBA_draft",
+        img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Paolo_Banchero_Magic.jpg",
+        team: "Orlando Magic",
+        college: "Duke",
+        position: "PF",
+        nationality: "USA"
     },
     {
         name: "Chris Paul",
@@ -261,13 +247,23 @@ const players = [
         name: "Brandon Roy",
         pick: 6,
         year: 2006,
-        wiki: "https://en.wikipedia.org/wiki/2006_NBA_draft"
+        wiki: "https://en.wikipedia.org/wiki/2006_NBA_draft",
+        img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Brandon_Roy_Trail_Blazers.jpg",
+        team: "Portland Trail Blazers",
+        college: "Washington",
+        position: "SG",
+        nationality: "USA"
     },
     {
         name: "Russell Westbrook",
         pick: 4,
         year: 2008,
-        wiki: "https://en.wikipedia.org/wiki/2008_NBA_draft"
+        wiki: "https://en.wikipedia.org/wiki/2008_NBA_draft",
+        img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Russell_Westbrook_Clippers.jpg",
+        team: "Seattle SuperSonics",
+        college: "UCLA",
+        position: "PG",
+        nationality: "USA"
     },
     {
         name: "Blake Griffin",
@@ -325,67 +321,59 @@ const players = [
         nationality: "USA"
     },
     {
-        name: "Ben Simmons",
-        pick: 1,
-        year: 2016,
-        wiki: "https://en.wikipedia.org/wiki/2016_NBA_draft",
-        img: "https://upload.wikimedia.org/wikipedia/commons/5/5d/Ben_Simmons_76ers.jpg",
-        team: "Philadelphia 76ers",
-        college: "LSU",
-        position: "PG/SF",
-        nationality: "Australia"
-    },
-    {
         name: "Donovan Mitchell",
         pick: 13,
         year: 2017,
-        wiki: "https://en.wikipedia.org/wiki/2017_NBA_draft"
+        wiki: "https://en.wikipedia.org/wiki/2017_NBA_draft",
+        img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Donovan_Mitchell_Cavaliers.jpg",
+        team: "Denver Nuggets (traded to Utah Jazz)",
+        college: "Louisville",
+        position: "SG",
+        nationality: "USA"
     },
     {
         name: "Trae Young",
         pick: 5,
         year: 2018,
-        wiki: "https://en.wikipedia.org/wiki/2018_NBA_draft"
-    },
-    {
-        name: "Ja Morant",
-        pick: 2,
-        year: 2019,
-        wiki: "https://en.wikipedia.org/wiki/2019_NBA_draft",
-        img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Ja_Morant_Grizzlies.jpg",
-        team: "Memphis Grizzlies",
-        college: "Murray State",
+        wiki: "https://en.wikipedia.org/wiki/2018_NBA_draft",
+        img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Trae_Young_Hawks.jpg",
+        team: "Dallas Mavericks (traded to Atlanta Hawks)",
+        college: "Oklahoma",
         position: "PG",
-        nationality: "USA"
-    },
-    {
-        name: "Anthony Edwards",
-        pick: 1,
-        year: 2020,
-        wiki: "https://en.wikipedia.org/wiki/2020_NBA_draft",
-        img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Anthony_Edwards_Timberwolves.jpg",
-        team: "Minnesota Timberwolves",
-        college: "Georgia",
-        position: "SG",
         nationality: "USA"
     },
     {
         name: "Jabari Smith Jr.",
         pick: 3,
         year: 2022,
-        wiki: "https://en.wikipedia.org/wiki/2022_NBA_draft"
+        wiki: "https://en.wikipedia.org/wiki/2022_NBA_draft",
+        img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Jabari_Smith_Rockets.jpg",
+        team: "Houston Rockets",
+        college: "Auburn",
+        position: "PF",
+        nationality: "USA"
     },
     {
         name: "Jaden Ivey",
         pick: 5,
         year: 2022,
-        wiki: "https://en.wikipedia.org/wiki/2022_NBA_draft"
+        wiki: "https://en.wikipedia.org/wiki/2022_NBA_draft",
+        img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Jaden_Ivey_Pistons.jpg",
+        team: "Detroit Pistons",
+        college: "Purdue",
+        position: "SG",
+        nationality: "USA"
     },
     {
         name: "Shaedon Sharpe",
         pick: 7,
         year: 2022,
-        wiki: "https://en.wikipedia.org/wiki/2022_NBA_draft"
+        wiki: "https://en.wikipedia.org/wiki/2022_NBA_draft",
+        img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Shaedon_Sharpe_Blazers.jpg",
+        team: "Portland Trail Blazers",
+        college: "Kentucky",
+        position: "SG",
+        nationality: "Canada"
     },
     {
         name: "Victor Wembanyama",
